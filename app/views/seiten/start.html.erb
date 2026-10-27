@@ -1,0 +1,43 @@
+<% content_for :title, "PlatzFrei" %>
+
+<%= render "shared/card", core_class: "px-6 py-16 text-center font-general sm:px-10 sm:py-24" do %>
+  <span class="eyebrow">Vereins-Platzreservierung</span>
+
+  <h1 class="mx-auto mt-6 max-w-2xl text-5xl font-bold leading-[1.05] tracking-tight text-neutral-900 sm:text-6xl">
+    Sportplätze buchen, ohne Doppelbuchungen.
+  </h1>
+
+  <% if angemeldet? %>
+    <p class="mx-auto mt-6 max-w-xl text-lg text-neutral-600">
+      Willkommen zurück, <strong class="font-semibold text-neutral-900"><%= current_benutzer.name %></strong>. Sieh dir freie Zeitfenster an oder verwalte deine Reservierungen.
+    </p>
+    <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <%= render "shared/button", label: "Freie Plätze ansehen", variant: :primary, href: zeitfenster_path %>
+      <%= render "shared/button", label: "Meine Reservierungen", variant: :secondary, href: reservierungen_path %>
+    </div>
+  <% else %>
+    <p class="mx-auto mt-6 max-w-xl text-lg text-neutral-600">
+      Reserviere freie Zeitfenster auf den Sportplätzen deines Vereins: in Echtzeit, fair und ohne Konflikte.
+    </p>
+    <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <%= render "shared/button", label: "Konto erstellen", variant: :primary, href: new_registrierung_path %>
+      <%= render "shared/button", label: "Anmelden", variant: :secondary, href: new_sitzung_path %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "shared/card", class: "mt-4", core_class: "divide-y divide-neutral-900/[0.06] p-2 sm:p-3" do %>
+  <% [
+       { nr: "01", title: "In Echtzeit", text: "Reservierte Zeitfenster verschwinden sofort aus der Übersicht aller anderen." },
+       { nr: "02", title: "Konfliktfrei", text: "Bei gleichzeitigen Buchungen bekommt genau eine Person den Platz." },
+       { nr: "03", title: "Mit Warteliste", text: "Ist ein Platz belegt, trägst du dich ein und wirst bei Stornierung frei." }
+     ].each do |feature| %>
+    <div class="flex items-baseline gap-5 px-4 py-5 sm:px-6">
+      <span class="font-display text-sm font-medium tabular-nums text-primary-600"><%= feature[:nr] %></span>
+      <div>
+        <h3><%= feature[:title] %></h3>
+        <p class="mt-1 text-sm text-neutral-500"><%= feature[:text] %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

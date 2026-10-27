@@ -1,0 +1,17 @@
+<%# Admin console context bar: a floating dark ink pill that marks the
+    management area as its own space, with its own active-state navigation. %>
+<div class="mt-3 rounded-2xl border border-white/10 bg-ink-900 px-3 py-2">
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <div class="flex items-center px-2 sm:border-r sm:border-white/10 sm:pr-3">
+      <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-300">Verwaltung</span>
+    </div>
+
+    <nav class="flex flex-wrap items-center gap-1" aria-label="Verwaltung">
+      <% admin_navigation.each do |link| %>
+        <%= link_to link[:label], link[:path],
+              class: class_names("subnav-link", "subnav-link-active" => nav_aktiv?(link[:path])),
+              aria: { current: ("page" if nav_aktiv?(link[:path])) } %>
+      <% end %>
+    </nav>
+  </div>
+</div>

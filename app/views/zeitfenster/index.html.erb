@@ -1,0 +1,102 @@
+<% content_for :title, "Platzübersicht – PlatzFrei" %>
+
+<% angezeigt = angezeigter_monat(@datum) %>
+<%
+  sportart_pille = lambda do |aktiv|
+    class_names(
+      "rounded-full px-4 py-2 text-sm font-medium no-underline transition-colors duration-300 hover:no-underline",
+      aktiv ? "bg-neutral-900 text-white hover:bg-neutral-900 hover:text-white" :
+              "border border-neutral-900/10 bg-white/60 text-neutral-700 backdrop-blur-md hover:bg-white hover:text-neutral-900"
+    )
+  end
+%>
+
+<%= render "shared/page_header",
+      eyebrow: "Platzübersicht",
+      title: "Freie Zeitfenster finden",
+      description: "Wähle Datum und Sportart. Reservierte Slots verschwinden in Echtzeit aus der Liste." %>
+
+<div class="mb-10 grid gap-4 lg:grid-cols-3 lg:items-start">
+  <div class="lg:col-span-2">
+    <%= render "zeitfenster/kalender", angezeigt: angezeigt, datum: @datum, sportart: @sportart %>
+  </div>
+
+  <%= render "shared/card", core_class: "p-5 sm:p-6" do %>
+    <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-neutral-500">Sportart</h3>
+    <div class="flex flex-wrap gap-2">
+      <%= link_to "Alle", zeitfenster_path(datum: @datum.iso8601, monat: angezeigt.iso8601), class: sportart_pille.call(@sportart.nil?) %>
+      <% @sportarten.each do |sportart| %>
+        <%= link_to sportart, zeitfenster_path(datum: @datum.iso8601, sportart: sportart, monat: angezeigt.iso8601), class: sportart_pille.call(@sportart == sportart) %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-5 flex flex-wrap items-center gap-3">
+  <span class="inline-flex items-center rounded-full border border-neutral-900/10 bg-white/60 px-4 py-2 text-sm font-semibold text-neutral-800 backdrop-blur-md tabular-nums">
+    <%= @datum.strftime("%d.%m.%Y") %>
+  </span>
+  <span class="text-sm text-neutral-500"><%= pluralize(@zeitfenster.size, "Zeitfenster") %></span>
+</div>
+
+<% if @zeitfenster.empty? %>
+  <%= render "shared/empty_state",
+        title: "Keine Zeitfenster gefunden",
+        description: "Für diesen Tag und diese Sportart gibt es keine Einträge. Versuch ein anderes Datum oder entferne den Filter." %>
+<% else %>
+  <% gruppen = @zeitfenster.group_by(&:sportplatz).sort_by { |sportplatz, _| [ sportplatz.sportart, sportplatz.name ] } %>
+  <%
+    details_pille = "inline-flex items-center rounded-full border border-neutral-900/10 bg-white/60 px-3.5 py-1.5 text-sm font-semibold text-primary-700 no-underline backdrop-blur-md transition-colors duration-300 hover:bg-white hover:no-underline"
+  %>
+
+  <div class="space-y-4">
+    <% gruppen.each do |sportplatz, slots| %>
+      <% pal = sportart_palette(sportplatz.sportart) %>
+      <div class="panel">
+        <table class="hidden w-full text-sm sm:table">
+          <thead>
+            <tr class="<%= pal[:kopf] %>">
+              <td class="w-12 py-4 pl-5 pr-0 align-middle"><%= render "zeitfenster/sportart_chip", sportart: sportplatz.sportart %></td>
+              <td class="py-4 pl-3 pr-5 align-middle font-display text-base font-semibold text-neutral-900"><%= sportplatz.name %></td>
+              <td class="whitespace-nowrap py-4 pr-5 text-right align-middle text-sm text-neutral-500"><%= sportplatz.sportart %> · <%= pluralize(slots.size, "Zeit") %></td>
+            </tr>
+          </thead>
+          <tbody>
+            <% slots.each do |zeitfenster| %>
+              <tr class="border-t border-neutral-900/[0.06] transition-colors duration-300 hover:bg-white/50">
+                <td colspan="2" class="py-3.5 pl-5 pr-3 font-medium tabular-nums text-neutral-900"><%= zeitfenster.start.strftime("%H:%M") %>–<%= zeitfenster.ende.strftime("%H:%M") %></td>
+                <td class="py-3.5 pr-5">
+                  <span class="flex items-center justify-end gap-3">
+                    <%= render "zeitfenster/status_badge", zeitfenster: zeitfenster %>
+                    <%= link_to "Details", zeitfenster_zeigen_path(zeitfenster), class: details_pille %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="sm:hidden">
+          <div class="flex items-center gap-3 border-b border-neutral-900/[0.06] px-4 py-3 <%= pal[:kopf] %>">
+            <%= render "zeitfenster/sportart_chip", sportart: sportplatz.sportart %>
+            <div>
+              <p class="font-display text-base font-semibold text-neutral-900"><%= sportplatz.name %></p>
+              <p class="text-sm text-neutral-500"><%= sportplatz.sportart %></p>
+            </div>
+          </div>
+          <ul class="divide-y divide-neutral-900/[0.06]">
+            <% slots.each do |zeitfenster| %>
+              <li class="flex items-center justify-between gap-3 px-4 py-3">
+                <span class="font-medium tabular-nums text-neutral-900"><%= zeitfenster.start.strftime("%H:%M") %>–<%= zeitfenster.ende.strftime("%H:%M") %></span>
+                <div class="flex items-center gap-2.5">
+                  <%= render "zeitfenster/status_badge", zeitfenster: zeitfenster %>
+                  <%= link_to "Details", zeitfenster_zeigen_path(zeitfenster), class: "text-sm font-semibold text-primary-700 no-underline hover:underline" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <title>Ein Fehler ist aufgetreten — PlatzFrei</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      * { margin: 0; }
+      html { font-size: 16px; }
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: #f7f8fa;
+        background-image: radial-gradient(1100px 460px at 50% -12%, rgba(59, 99, 246, 0.09), transparent 70%);
+        color: #333c52;
+        font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .card {
+        max-width: 460px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid rgba(225, 230, 238, 0.8);
+        border-radius: 24px;
+        padding: 48px 40px;
+        box-shadow: 0 8px 24px -12px rgba(17, 24, 40, 0.18);
+      }
+      .mark {
+        width: 56px; height: 56px;
+        display: inline-grid; place-items: center;
+        border-radius: 16px;
+        background: #2445ea; color: #fff;
+        box-shadow: 0 6px 16px -6px rgba(36, 69, 234, 0.5);
+      }
+      .code { margin-top: 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2445ea; }
+      h1 { margin-top: 8px; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #111828; }
+      p { margin-top: 12px; font-size: 15px; line-height: 1.6; color: #64718a; }
+      a.btn {
+        margin-top: 28px;
+        display: inline-block;
+        background: #2445ea; color: #fff;
+        text-decoration: none;
+        font-weight: 600; font-size: 14px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        transition: background 150ms ease;
+      }
+      a.btn:hover { background: #1c34d1; }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <span class="mark" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+      </span>
+      <p class="code">Fehler 500</p>
+      <h1>Da ist etwas schiefgelaufen</h1>
+      <p>Auf dem Server ist ein Fehler aufgetreten. Versuch es in einem Moment noch einmal — wir kümmern uns darum.</p>
+      <a class="btn" href="/">Zur Startseite</a>
+    </main>
+  </body>
+</html>

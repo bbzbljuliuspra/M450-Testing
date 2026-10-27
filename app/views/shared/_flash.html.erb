@@ -1,0 +1,14 @@
+<%# Renders every flash message with a consistent success/error/info style. %>
+<% flash.each do |art, nachricht| %>
+  <%
+    classes, marke = case art.to_s
+    when "notice" then [ "border-success-600/25 bg-success-50 text-success-800", "Erfolg" ]
+    when "alert"  then [ "border-error-600/30 bg-error-50 text-error-800", "Fehler" ]
+    else               [ "border-neutral-500/25 bg-neutral-100 text-neutral-800", "Hinweis" ]
+    end
+  %>
+  <div class="mb-6 flex items-baseline gap-3 rounded-2xl border px-4 py-3.5 text-sm <%= classes %>" role="alert">
+    <span class="text-[11px] font-semibold uppercase tracking-[0.14em] opacity-70"><%= marke %></span>
+    <p class="font-medium"><%= nachricht %></p>
+  </div>
+<% end %>

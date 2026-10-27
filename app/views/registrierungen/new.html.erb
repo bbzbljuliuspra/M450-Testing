@@ -1,0 +1,45 @@
+<% content_for :title, "Registrieren – PlatzFrei" %>
+
+<div class="mx-auto max-w-md py-6 sm:py-10">
+  <div class="mb-7 text-center">
+    <span class="eyebrow">Konto erstellen</span>
+    <h1 class="mt-4">Registrieren</h1>
+    <p class="mt-2 text-[15px] text-neutral-500">In wenigen Sekunden startklar für die erste Reservierung.</p>
+  </div>
+
+  <%= render "shared/card" do %>
+    <% if @benutzer.errors[:base].present? %>
+      <div class="mb-5 rounded-2xl bg-error-50 px-4 py-3 text-sm text-error-800 border border-error-600/25">
+        <% @benutzer.errors[:base].each do |nachricht| %>
+          <p><%= nachricht %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_with model: @benutzer, url: registrierung_path do |form| %>
+      <%= render "shared/form_field", label: "Name", required: true, errors: @benutzer.errors[:name] do %>
+        <%= form.text_field :name, class: form_input_classes(@benutzer.errors[:name]), required: true, autofocus: true, autocomplete: "name" %>
+      <% end %>
+
+      <%= render "shared/form_field", label: "E-Mail", required: true, errors: @benutzer.errors[:email] do %>
+        <%= form.email_field :email, class: form_input_classes(@benutzer.errors[:email]), required: true, autocomplete: "email", placeholder: "name@beispiel.ch" %>
+      <% end %>
+
+      <%= render "shared/form_field", label: "Passwort", required: true, errors: @benutzer.errors[:password], hint: "Mindestens 8 Zeichen" do %>
+        <%= form.password_field :password, class: form_input_classes(@benutzer.errors[:password]), required: true, autocomplete: "new-password" %>
+      <% end %>
+
+      <%= render "shared/form_field", label: "Passwort bestätigen", required: true, errors: @benutzer.errors[:password_confirmation] do %>
+        <%= form.password_field :password_confirmation, class: form_input_classes(@benutzer.errors[:password_confirmation]), required: true, autocomplete: "new-password" %>
+      <% end %>
+
+      <div class="pt-1">
+        <%= render "shared/button", label: "Konto erstellen", variant: :primary, class: "w-full" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <p class="mt-7 text-center text-sm text-neutral-500">
+    Bereits ein Konto? <%= link_to "Anmelden", new_sitzung_path, class: "font-semibold" %>
+  </p>
+</div>
