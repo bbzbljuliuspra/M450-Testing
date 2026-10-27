@@ -1,9 +1,0 @@
-<%#
-  Sportart identifier: a monogram chip (the Sportart's initial in the display
-  serif) tinted with that sport's own soft hue (one hue per sport, kept light
-  so it stays clear of the green/gray/red status badges).
-
-  Locals:
-    sportart: the Sportart name (string)
-%>
-<span class="sport-chip <%= sportart_palette(sportart)[:chip] %>" title="<%= sportart %>"><span class="sr-only"><%= sportart %></span><span aria-hidden="true"><%= sportart.to_s.first&.upcase %></span></span>
