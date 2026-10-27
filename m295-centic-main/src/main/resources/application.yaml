@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: centic
+  datasource:
+    url: jdbc:postgresql://localhost:5432/centic
+    username: centic_user
+    password: centic_pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/ILV
+server:
+  port: 9090
