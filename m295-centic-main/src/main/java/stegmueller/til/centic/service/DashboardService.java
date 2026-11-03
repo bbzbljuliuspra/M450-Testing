@@ -9,6 +9,7 @@ import stegmueller.til.centic.model.User;
 import stegmueller.til.centic.repository.TransactionRepository;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class DashboardService {
 
     private final TransactionRepository transactionRepo;
+    private final Clock clock;
 
     public Map<String, Object> getSummary(User user) {
         BigDecimal totalIncome  = transactionRepo.sumAmountByUserIdAndType(user.getId(), TransactionType.INCOME);
@@ -40,7 +42,7 @@ public class DashboardService {
         Map<String, BigDecimal> incomeByMonth  = new TreeMap<>();
         Map<String, BigDecimal> expenseByMonth = new TreeMap<>();
 
-        YearMonth current = YearMonth.now();
+        YearMonth current = YearMonth.now(clock);
         for (int i = months - 1; i >= 0; i--) {
             String key = current.minusMonths(i).format(fmt);
             incomeByMonth.put(key, BigDecimal.ZERO);
@@ -63,7 +65,7 @@ public class DashboardService {
     }
 
     public Map<String, BigDecimal> getCategoryStats(User user) {
-        String currentMonth = YearMonth.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        String currentMonth = YearMonth.now(clock).format(DateTimeFormatter.ofPattern("yyyy-MM"));
 
         return transactionRepo.findByUserId(user.getId()).stream()
                 .filter(t -> t.getType() == TransactionType.EXPENSE
