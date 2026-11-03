@@ -34,7 +34,6 @@ import static org.mockito.Mockito.when;
 
 /**
  * Pflicht 2 (Logik): Kategorien 1–3 der Testkategorien.
- * Kategorie 4 (Diskrete Grenzwerte) steht in DashboardServiceTest.
  */
 @DisplayName("BudgetService")
 class BudgetServiceTest {

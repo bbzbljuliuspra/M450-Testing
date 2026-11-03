@@ -15,6 +15,9 @@ public class StatistikService {
 
     public double durchschnittlicheUsernameLaenge() {
         List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            return 0.0;
+        }
         int summe = 0;
         for (User user : users) {
             summe += user.getUsername().length();
