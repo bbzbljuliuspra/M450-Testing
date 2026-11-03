@@ -70,7 +70,7 @@ public class BudgetService {
                     .map(Transaction::getAmount)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-            if (spent.compareTo(budget.getLimitAmount()) > 0) {
+            if (spent.compareTo(budget.getLimitAmount()) >= 0) {
                 Map<String, Object> alert = new LinkedHashMap<>();
                 alert.put("category", budget.getCategory().getName());
                 alert.put("limit", budget.getLimitAmount());
