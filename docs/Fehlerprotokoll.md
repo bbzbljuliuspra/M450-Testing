@@ -36,3 +36,21 @@ Inhalt zum Übertragen in die Excel-Vorlage der Lehrperson.
 | Schwere | Hoch (ganzer Endpoint fällt für den User aus) |
 | Status | Offen |
 | Gefunden durch | Unit-Test (Edge Case `null`) |
+
+## Fehler 3 – TDD Statistik: Leere Datenbank liefert NaN als Durchschnitt
+
+| Feld | Inhalt |
+|---|---|
+| Nr. | 3 |
+| Datum | 03.11.2026 |
+| Unit | `StatistikService.durchschnittlicheUsernameLaenge()` |
+| Test | `StatistikServiceTest.keineUser_liefertNull` |
+| Testdaten | `userRepository.findAll()` liefert eine leere Liste (noch keine User in der DB) |
+| Erwartet | `0.0` |
+| Tatsächlich | `NaN` |
+| Test-Output | `expected: <0.0> but was: <NaN>` |
+| Ursache | Division `(double) 0 / 0`. Bei `double` wirft Java keine `ArithmeticException`, sondern liefert still `NaN`. |
+| Korrekturmassnahme | Vor der Division prüfen: Ist die Liste leer, wird `0.0` zurückgegeben. |
+| Schwere | Mittel (falscher Wert in der Statistik, `NaN` lässt sich nicht als JSON-Zahl ausgeben) |
+| Status | Behoben |
+| Gefunden durch | Unit-Test (Edge Case leere Menge) |
