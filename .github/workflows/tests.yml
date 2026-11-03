@@ -1,0 +1,36 @@
+name: Unit-Tests und Mutation Testing
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: m295-centic-main
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '26'
+          cache: maven
+
+      - name: Unit-Tests
+        run: ./mvnw -B test
+
+      - name: Mutation Testing (PIT, Schwelle 100 %)
+        run: ./mvnw -B test-compile org.pitest:pitest-maven:mutationCoverage
+
+      - name: Test-Reports hochladen
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            m295-centic-main/target/surefire-reports/
+            m295-centic-main/target/pit-reports/
