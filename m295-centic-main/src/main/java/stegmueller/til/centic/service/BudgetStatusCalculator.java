@@ -37,8 +37,7 @@ public class BudgetStatusCalculator {
         }
         YearMonth yearMonth = parseMonth(month);
 
-        // ACHTUNG: absichtlich eingebauter Fehler für TDD 3b (siehe docs/Fehlerprotokoll.md)
-        if (spent.compareTo(limit) >= 0) {
+        if (spent.compareTo(limit) > 0) {
             return BudgetStatus.ROT;
         }
         if (spent.compareTo(limit.multiply(WARN_RATIO)) >= 0) {

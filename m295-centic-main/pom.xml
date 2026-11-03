@@ -158,6 +158,7 @@
 					<targetClasses>
 						<param>stegmueller.til.centic.service.BudgetService</param>
 						<param>stegmueller.til.centic.service.DashboardService</param>
+						<param>stegmueller.til.centic.service.BudgetStatusCalculator</param>
 					</targetClasses>
 					<targetTests>
 						<param>stegmueller.til.centic.service.*</param>

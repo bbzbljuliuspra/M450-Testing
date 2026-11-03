@@ -82,6 +82,14 @@ class BudgetStatusCalculatorTest {
         }
 
         @Test
+        @DisplayName("Prognose genau auf dem Limit ist noch keine Überschreitung")
+        void prognoseGenauAufDemLimit() {
+            // Limit 31.00 am 15.05.: 15.00 * 31 = 465 = 31.00 * 15 -> Prognose exakt 31.00
+            assertThat(evaluate("31.00", "15.00", "2026-05")).isEqualTo(BudgetStatus.GRUEN);
+            assertThat(evaluate("31.00", "15.01", "2026-05")).isEqualTo(BudgetStatus.PROGNOSE_UEBERSCHREITUNG);
+        }
+
+        @Test
         @DisplayName("Am 1. des Monats: schon 5 % ausgegeben ergibt Prognose 155 %")
         void ersterTagDesMonats() {
             BudgetStatusCalculator firstDay = calculatorAt("2026-05-01T08:00:00Z");
