@@ -38,7 +38,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 /**
- * Pflicht 2 (freie Wahl): Time-Freezing mit Clock.fixed kombiniert mit erweitertem Mocking
+ * Pflicht 1 (Mocking): Time-Freezing mit Clock.fixed kombiniert mit erweitertem Mocking
  * (ArgumentCaptor, InOrder, verifyNoMoreInteractions, simulierte DB-Fehler).
  */
 @DisplayName("Budget-Alerts über die Zeit (Clock Mocking + erweitertes Mocking)")
