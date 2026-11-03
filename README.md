@@ -49,13 +49,14 @@ Darin liegen `surefire-reports/` und `pit-reports/index.html`.
 
 ## Übersicht der Tests
 
-| Datei | Inhalt |
-|---|---|
-| `BudgetServiceTest` | Kombinatorische Logik, kontinuierliche Grenzwerte, Fehlerbehandlung |
-| `DashboardServiceTest` | Diskrete Grenzwerte, Sammlungen |
-| `BudgetAlertTimeTest` | Freie Wahl: Clock Mocking und erweitertes Mocking |
-| `BudgetStatusCalculatorTest` | TDD (Tests vor der Implementierung) |
-| `StatistikServiceTest` | Statistik-Auswertungen |
+| Teil | Datei | Inhalt |
+|---|---|---|
+| Pflicht 1 (Mocking) | `BudgetAlertTimeTest` | Clock Mocking (Time-Freezing) und erweitertes Mocking |
+| Pflicht 2 (Logik) | `BudgetServiceTest` | Kategorie 1–3: Kombinatorische Logik, kontinuierliche Grenzwerte, Fehlerbehandlung |
+| Pflicht 2 (Logik) | `DashboardServiceTest` | Kategorie 4: Diskrete Grenzwerte, dazu Sammlungen |
+| TDD | `BudgetStatusCalculatorTest` | Budget-Ampel, Tests vor der Implementierung |
+| TDD | `StatistikServiceTest` | Durchschnittliche Username-Länge |
+| Mutation Testing | `pom.xml` (PIT) | prüft die Units aus Pflicht 1 und 2 sowie die TDD-Units |
 
 Gefundene Fehler: `docs/Fehlerprotokoll.md`.
 

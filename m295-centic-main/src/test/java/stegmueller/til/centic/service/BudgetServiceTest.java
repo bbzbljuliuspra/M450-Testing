@@ -32,6 +32,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Pflicht 2 (Logik): Kategorien 1–3 der Testkategorien.
+ * Kategorie 4 (Diskrete Grenzwerte) steht in DashboardServiceTest.
+ */
 @DisplayName("BudgetService")
 class BudgetServiceTest {
 
@@ -79,7 +83,7 @@ class BudgetServiceTest {
         when(transactionRepo.findByUserId(me.getId())).thenReturn(List.of(transactions));
     }
 
-    // ---------- Kategorie 1: Kombinatorische Logik ----------
+    // ---------- Pflicht 2, Kategorie 1: Kombinatorische Logik ----------
 
     @Nested
     @DisplayName("Kombinatorische Logik: welche Transaktionen zählen zum Budget?")
@@ -140,7 +144,7 @@ class BudgetServiceTest {
         }
     }
 
-    // ---------- Kategorie 2: Kontinuierliche Grenzwerte ----------
+    // ---------- Pflicht 2, Kategorie 2: Kontinuierliche Grenzwerte ----------
 
     @Nested
     @DisplayName("Kontinuierliche Grenzwerte: Ausgaben vs. Limit (BigDecimal, Rappen-genau)")
@@ -187,7 +191,7 @@ class BudgetServiceTest {
         }
     }
 
-    // ---------- Kategorie 3: Fehlerbehandlung & Edge Cases ----------
+    // ---------- Pflicht 2, Kategorie 3: Fehlerbehandlung & Edge Cases ----------
 
     @Nested
     @DisplayName("Fehlerbehandlung & Edge Cases")

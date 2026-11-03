@@ -24,6 +24,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Pflicht 2 (Logik): Kategorie 4 (Diskrete Grenzwerte) plus Sammlungen als Ergänzung.
+ */
 @DisplayName("DashboardService")
 class DashboardServiceTest {
 
@@ -57,7 +60,7 @@ class DashboardServiceTest {
         return (Map<String, BigDecimal>) summary.get(key);
     }
 
-    // ---------- Kategorie 4: Diskrete Grenzwerte ----------
+    // ---------- Pflicht 2, Kategorie 4: Diskrete Grenzwerte ----------
 
     @Nested
     @DisplayName("Diskrete Grenzwerte: Monatsfenster von getMonthlySummary(months)")
