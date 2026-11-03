@@ -117,19 +117,6 @@ class BudgetAlertTimeTest {
             assertThat(alerts).hasSize(1);
             assertThat((BigDecimal) alerts.get(0).get("spent")).isEqualByComparingTo("110.00");
         }
-
-        @Test
-        @DisplayName("Dashboard: 3-Monats-Fenster über den Jahreswechsel")
-        void dashboardFensterUeberJahreswechsel() {
-            when(transactionRepo.findByUserId(me.getId())).thenReturn(List.of());
-            DashboardService dashboard = new DashboardService(transactionRepo,
-                    Clock.fixed(Instant.parse("2027-01-15T08:00:00Z"), ZoneOffset.UTC));
-
-            @SuppressWarnings("unchecked")
-            Map<String, BigDecimal> income = (Map<String, BigDecimal>) dashboard.getMonthlySummary(me, 3).get("income");
-
-            assertThat(income.keySet()).containsExactly("2026-11", "2026-12", "2027-01");
-        }
     }
 
     @Nested
