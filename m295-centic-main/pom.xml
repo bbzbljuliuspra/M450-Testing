@@ -142,6 +142,38 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- Mutation Testing: ./mvnw test-compile org.pitest:pitest-maven:mutationCoverage -->
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.30.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>1.2.3</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<targetClasses>
+						<param>stegmueller.til.centic.service.BudgetService</param>
+						<param>stegmueller.til.centic.service.DashboardService</param>
+						<param>stegmueller.til.centic.service.BudgetStatusCalculator</param>
+					</targetClasses>
+					<targetTests>
+						<param>stegmueller.til.centic.service.*</param>
+					</targetTests>
+					<mutators>
+						<mutator>STRONGER</mutator>
+					</mutators>
+					<outputFormats>
+						<format>HTML</format>
+						<format>XML</format>
+					</outputFormats>
+					<timestampedReports>false</timestampedReports>
+					<mutationThreshold>100</mutationThreshold>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

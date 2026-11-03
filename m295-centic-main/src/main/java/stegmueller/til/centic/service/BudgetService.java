@@ -11,6 +11,7 @@ import stegmueller.til.centic.repository.BudgetRepository;
 import stegmueller.til.centic.repository.TransactionRepository;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -22,6 +23,7 @@ public class BudgetService {
 
     private final BudgetRepository budgetRepo;
     private final TransactionRepository transactionRepo;
+    private final Clock clock;
 
     public List<Budget> getAllForUser(User user) {
         return budgetRepo.findByUserId(user.getId());
@@ -53,7 +55,7 @@ public class BudgetService {
     }
 
     public List<Map<String, Object>> checkBudgetAlerts(User user) {
-        String currentMonth = YearMonth.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        String currentMonth = YearMonth.now(clock).format(DateTimeFormatter.ofPattern("yyyy-MM"));
         List<Budget> budgets = budgetRepo.findByUserIdAndMonth(user.getId(), currentMonth);
         List<Transaction> allTransactions = transactionRepo.findByUserId(user.getId());
 
