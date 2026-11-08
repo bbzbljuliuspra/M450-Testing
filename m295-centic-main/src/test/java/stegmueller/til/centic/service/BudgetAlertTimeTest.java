@@ -126,7 +126,7 @@ class BudgetAlertTimeTest {
         private final BudgetService service = serviceAt("2026-05-15T10:00:00Z", ZoneOffset.UTC);
 
         @Test
-        @DisplayName("Erst Budgets, dann Transaktionen laden – jeweils genau einmal, mit der User-ID")
+        @DisplayName("Erst Budgets, dann Transaktionen laden - jeweils genau einmal, mit der User-ID")
         void reihenfolgeUndAnzahlDerAufrufe() {
             when(budgetRepo.findByUserIdAndMonth(1L, "2026-05")).thenReturn(List.of(budget("2026-05", "10.00")));
             when(transactionRepo.findByUserId(1L)).thenReturn(List.of(expense("2026-05-02", "20.00")));
