@@ -27,7 +27,7 @@ Inhalt zum Übertragen in die Excel-Vorlage der Lehrperson.
 | Nr. | 2 |
 | Datum | 03.11.2026 |
 | Unit | `BudgetService.checkBudgetAlerts(user)` |
-| Test | `BudgetServiceTest.Fehlerbehandlung.budgetOhneKategorie` |
+| Test | `BudgetAlertTimeTest.Fehlerbehandlung.budgetOhneKategorie` |
 | Testdaten | Budget mit `category = null`, eine Ausgabe in „Essen“ im aktuellen Monat |
 | Erwartet | Budget wird ignoriert oder ein verständlicher Fehler (z. B. 400 Bad Request) |
 | Tatsächlich | `NullPointerException` bei `budget.getCategory().getId()` (HTTP 500 auf `/api/budgets/check`) |
