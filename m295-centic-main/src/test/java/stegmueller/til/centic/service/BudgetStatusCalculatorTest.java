@@ -18,8 +18,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Pflicht 2 (Logik): BudgetStatusCalculator wird auf Herz und Nieren getestet
- * (Validierung, Grenzwerte, Prognose). Die Tests wurden per TDD geschrieben, bevor die Klasse existierte.
- *
  * Regeln (Budget-Ampel):
  *  - Ausgaben > Limit                          -> ROT
  *  - Ausgaben >= 80 % des Limits (bis 100 %)   -> GELB
