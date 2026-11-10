@@ -51,11 +51,11 @@ Darin liegen `surefire-reports/` und `pit-reports/index.html`.
 
 | Teil | Datei | Inhalt |
 |---|---|---|
-| Pflicht 1 (Mocking) | `BudgetAlertTimeTest` | Clock Mocking (Time-Freezing) und erweitertes Mocking |
-| Pflicht 2 (Logik) | `BudgetServiceTest` | Kategorie 1–3: Kombinatorische Logik, kontinuierliche Grenzwerte, Fehlerbehandlung |
-| TDD | `BudgetStatusCalculatorTest` | Budget-Ampel, Tests vor der Implementierung |
-| TDD | `StatistikServiceTest` | Durchschnittliche Username-Länge |
-| Mutation Testing | `pom.xml` (PIT) | prüft die Units aus Pflicht 1 und 2 sowie die TDD-Units |
+| Pflicht 1 (Mocking) – Unit `BudgetService` | `BudgetAlertTimeTest` | Clock Mocking (Time-Freezing) und erweitertes Mocking |
+| Pflicht 1 (Mocking) – Unit `BudgetService` | `BudgetServiceTest` | Repos gemockt, Kategorie 1–3: Kombinatorische Logik, kontinuierliche Grenzwerte, Fehlerbehandlung |
+| Pflicht 2 (Logik) – Unit `BudgetStatusCalculator` | `BudgetStatusCalculatorTest` | Budget-Ampel: Validierung, Grenzwerte, Prognose (per TDD entstanden) |
+| TDD Statistik – Unit `StatistikService` | `StatistikServiceTest` | Durchschnittliche Username-Länge |
+| Mutation Testing | `pom.xml` (PIT) | prüft die Units aus Pflicht 1 und 2 sowie die TDD-Unit |
 
 Gefundene Fehler: `docs/Fehlerprotokoll.md`.
 

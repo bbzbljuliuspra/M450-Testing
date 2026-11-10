@@ -17,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * TDD: Diese Tests wurden geschrieben, bevor BudgetStatusCalculator existierte.
+ * Pflicht 2 (Logik): BudgetStatusCalculator wird auf Herz und Nieren getestet
+ * (Validierung, Grenzwerte, Prognose). Die Tests wurden per TDD geschrieben, bevor die Klasse existierte.
  *
  * Regeln (Budget-Ampel):
  *  - Ausgaben > Limit                          -> ROT
@@ -26,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *  - sonst                                     -> GRUEN
  *  - Monat muss Format yyyy-MM haben, Limit > 0, Ausgaben >= 0, nichts darf null sein
  */
-@DisplayName("BudgetStatusCalculator (TDD)")
+@DisplayName("BudgetStatusCalculator (Logik)")
 class BudgetStatusCalculatorTest {
 
     // "Heute" ist Freitag, 15. Mai 2026 (Mai hat 31 Tage)

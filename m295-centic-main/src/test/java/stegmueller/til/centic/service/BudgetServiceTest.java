@@ -33,7 +33,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Pflicht 2 (Logik): Kategorien 1–3 der Testkategorien.
+ * Pflicht 1 (Mocking): BudgetService mit gemockten Repositories und fixer Clock,
+ * Kategorien 1–3 der Testkategorien. Zusammen mit BudgetAlertTimeTest wird die Unit komplett getestet.
  */
 @DisplayName("BudgetService")
 class BudgetServiceTest {
@@ -82,7 +83,7 @@ class BudgetServiceTest {
         when(transactionRepo.findByUserId(me.getId())).thenReturn(List.of(transactions));
     }
 
-    // ---------- Pflicht 2, Kategorie 1: Kombinatorische Logik ----------
+    // ---------- Pflicht 1, Kategorie 1: Kombinatorische Logik ----------
 
     @Nested
     @DisplayName("Kombinatorische Logik: welche Transaktionen zählen zum Budget?")
@@ -143,7 +144,7 @@ class BudgetServiceTest {
         }
     }
 
-    // ---------- Pflicht 2, Kategorie 2: Kontinuierliche Grenzwerte ----------
+    // ---------- Pflicht 1, Kategorie 2: Kontinuierliche Grenzwerte ----------
 
     @Nested
     @DisplayName("Kontinuierliche Grenzwerte: Ausgaben vs. Limit (BigDecimal, Rappen-genau)")
@@ -190,7 +191,7 @@ class BudgetServiceTest {
         }
     }
 
-    // ---------- Pflicht 2, Kategorie 3: Fehlerbehandlung & Edge Cases ----------
+    // ---------- Pflicht 1, Kategorie 3: Fehlerbehandlung & Edge Cases ----------
 
     @Nested
     @DisplayName("Fehlerbehandlung & Edge Cases")

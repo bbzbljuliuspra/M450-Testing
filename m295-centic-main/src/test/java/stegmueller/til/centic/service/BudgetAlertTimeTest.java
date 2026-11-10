@@ -40,6 +40,7 @@ import static org.mockito.Mockito.when;
 /**
  * Pflicht 1 (Mocking): Time-Freezing mit Clock.fixed kombiniert mit erweitertem Mocking
  * (ArgumentCaptor, InOrder, verifyNoMoreInteractions, simulierte DB-Fehler).
+ * Unit: BudgetService (zusammen mit BudgetServiceTest).
  */
 @DisplayName("Budget-Alerts über die Zeit (Clock Mocking + erweitertes Mocking)")
 class BudgetAlertTimeTest {
